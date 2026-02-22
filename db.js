@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 
 //Define the MonogoDB connection URL
-const mongoURL ='mongodb://localhost:27017/Dabha';
+const mongoURL ='mongodb://localhost:27017/';
 
 
 //Set up MonogoDB  connection
