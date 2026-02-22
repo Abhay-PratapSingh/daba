@@ -10,7 +10,7 @@ app.use(bodyParser.json());//request.body
 
 
 
-
+//welcome API of dabha 
 app.get('/',function(req,res){
 
  res.send("welcome to my hotel.... How i can help you  ?, we have  list of  dishes ");
