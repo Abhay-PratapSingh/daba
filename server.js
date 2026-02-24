@@ -24,8 +24,11 @@ app.get('/',function(req,res){
 
 //Import the route files
 
-const personRoutes =require('./routes/personRoutes');
-const menuRoutes =require('./routes/menuRoute');
+// const personRoutes =require('./routes/personRoutes');
+// const menuRoutes =require('./Routes/MenuRoutes');
+
+const menuRoutes = require('./Routes/MenuRoutes');
+const personRoutes = require('./Routes/personRoutes');
 
 
 
