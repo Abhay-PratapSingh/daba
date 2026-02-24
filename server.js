@@ -27,7 +27,7 @@ app.get('/',function(req,res){
 // const personRoutes =require('./routes/personRoutes');
 // const menuRoutes =require('./Routes/MenuRoutes');
 
-const menuRoutes = require('./Routes/MenuRoutes');
+const menuRoutes = require('./Routes/menuRoutes');
 const personRoutes = require('./Routes/personRoutes');
 
 
