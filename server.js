@@ -10,8 +10,22 @@ app.use(bodyParser.json());//request.body
 
 const PORT = process.env.PORT  ||  3000;
 
+
+//middleware  defination
+
+
+const logRequest = (req, res, next) => {
+  console.log(`${new Date().toLocaleString()} Request made to: ${req.originalUrl}`);
+  next();
+};
+
+
+
+
+
+
 //welcome API of dabha  , we need to work with u
-app.get('/',function(req,res){
+app.get('/', logRequest,function(req,res){
 
  res.send("welcome to my hotel.... How i can help you  ?, we have  list of  dishes ");
 
