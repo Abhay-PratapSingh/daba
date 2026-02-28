@@ -2,6 +2,10 @@ require('dotenv').config();
 const express =require('express')
 const app = express()
 const db =require('./db');
+const passport =require('passport');
+const  LocalStrategy =require('passport-local').Strategy;
+const Person = require('./models/Person');
+
 
 
 
@@ -16,12 +20,42 @@ const PORT = process.env.PORT  ||  3000;
 
 const logRequest = (req, res, next) => {
   console.log(`${new Date().toLocaleString()} Request made to: ${req.originalUrl}`);
-  next();
+  next();//move on to next phase
 };
 
 app.use(logRequest);
 
+passport.use(new LocalStrategy (async(USERNAME,password,done)=>{
 
+//authentication logic here
+try{
+
+console.log('Receiverd credenticals',USERNAME,password);
+
+const user = await Person.findOne({username:USERNAME});
+if(!user)
+  return done(null,false,{message:'Incorrect Username'});
+
+const isPasswordMatch= user.password === password ? true :false;
+
+if(isPasswordMatch){
+  return done(null,user);
+}
+else {
+
+ return  done(null,false,{message : 'Incorrect  Password'});
+  
+}
+}catch(err){
+
+
+  return done(err);
+
+}
+
+}));
+
+app.use(passport.initialize())
 
 
 //welcome API of dabha  , we need to work with u

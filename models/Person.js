@@ -5,7 +5,8 @@ const personSchema = new mongoose.Schema({
     name :{
 
         type :String,
-        required:true
+        required:true,
+          trim: true
 
 
     },
@@ -37,7 +38,21 @@ const personSchema = new mongoose.Schema({
 
         type:Number,
         required:true
-    }
+    },
+
+    username :{
+
+  required:true,
+  type:String,
+   trim: true
+    },
+
+    password:{
+
+required:true,
+type:String,
+minlength: 6
+},
 
 
 })
