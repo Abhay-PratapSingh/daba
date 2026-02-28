@@ -57,9 +57,9 @@ else {
 
 app.use(passport.initialize())
 
-
+const localauthMiddleware =passport.authenticate('local',{session:false})
 //welcome API of dabha  , we need to work with u
-app.get('/',passport.authenticate('local',{session:false}),function(req,res){
+app.get('/',localauthMiddleware,function(req,res){
 
  res.send("welcome to my hotel.... How i can help you  ?, we have  list of  dishes ");
 
@@ -81,7 +81,7 @@ const personRoutes = require('./routes/personRoutes');
 
 
 //use the routes
-app.use('/person', personRoutes);
+app.use('/person',localauthMiddleware, personRoutes);
 app.use('/menu', menuRoutes);
 
 
