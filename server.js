@@ -59,7 +59,7 @@ app.use(passport.initialize())
 
 
 //welcome API of dabha  , we need to work with u
-app.get('/',function(req,res){
+app.get('/',passport.authenticate('local',{session:false}),function(req,res){
 
  res.send("welcome to my hotel.... How i can help you  ?, we have  list of  dishes ");
 
