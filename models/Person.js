@@ -85,13 +85,16 @@ next();
     }
     catch(err){
 
-return  next(err);
+return err;
 
     }
 })
 
 
+
+
 personSchema.methods.comparePassword=async function (candidatePassword){
+
 
 try{
 
