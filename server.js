@@ -27,6 +27,8 @@ app.use(logRequest);
 
 passport.use(new LocalStrategy (async(USERNAME,password,done)=>{
 
+     console.log("USERNAME:", USERNAME);
+    console.log("PASSWORD:", password);
 //authentication logic here
 try{
 
