@@ -35,7 +35,7 @@ if(!token)  return  res.status(401).json({error :"UNauthorized"});
 const generateToken = (userData) =>{
 
     //generate  a new JWT token using user data
-    return jwt.sign(userData,process.env.JWT_SECRET);
+    return jwt.sign(userData,process.env.JWT_SECRET,{expiresIn:60});
 
 }
 
