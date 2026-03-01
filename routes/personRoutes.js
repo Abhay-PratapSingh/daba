@@ -174,60 +174,97 @@ console.log(err);
 
 //login route
 
-router.post('/login',async(req,res)=>{
+// router.post('/login',async(req,res)=>{
 
-try{
+// try{
 
-//Extract Username  and Password  from request  body
+// //Extract Username  and Password  from request  body
 
-const {username,password}=req.body;
-
-
-//find  the user by user username
-
-const  user =  await Person.findOne({username :username});
-
-//if user does not exist or password does not match , return  error
-
-if(!user || !(await user.comparePassword(password)  )){
-
-  return res.status(401).json({error : 'invalid  username or password '});
-
-}
+// const {username,password}=req.body;
 
 
+// //find  the user by user username
 
-const payload  ={
+// const  user =  await Person.findOne({username :username});
 
-id : user.id,
-username:user.username
+// //if user does not exist or password does not match , return  error
 
-}
+// if(!user || !(await user.comparePassword(password)  )){
 
-const  token = generateToken(payload)
+//   return res.status(401).json({error : 'invalid  username or password '});
 
-//return token as response 
-
-res.json({token});
+// }
 
 
 
-}catch(err){
+// const payload  ={
 
-  console.error(err);
-  res.status(500).json({error : ' Internal Server Error '});
+// id : user.id,
+// username:user.username
+
+// }
+
+// const  token = generateToken(payload)
+
+// //return token as response 
+
+// res.json({token});
 
 
 
-}
+// }catch(err){
 
-})
+//   console.error(err);
+//   res.status(500).json({error : ' Internal Server Error '});
 
 
+
+// }
+
+// })
 
 
 
 
+
+router.post('/login', async (req, res) => {
+  try {
+
+    const { username, password } = req.body;
+
+    // ✅ Step 1: Check if body exists
+    if (!username || !password) {
+      return res.status(400).json({ error: "Username and password are required" });
+    }
+
+    const user = await Person.findOne({ username });
+
+    // ✅ Step 2: Check if user exists
+    if (!user) {
+      return res.status(401).json({ error: "Invalid username or password" });
+    }
+
+    // ✅ Step 3: Compare password safely
+    const isMatch = await user.comparePassword(password);
+
+    if (!isMatch) {
+      return res.status(401).json({ error: "Invalid username or password" });
+    }
+
+    const payload = {
+      id: user.id,
+      username: user.username
+    };
+
+    const token = generateToken(payload);
+
+    res.json({ token });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 
 
