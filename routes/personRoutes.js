@@ -40,7 +40,7 @@ res.status(500).json({error:' !!Internal Server Error !!'});
 
 
 
-router.get('/',async(req,res)=>{
+router.get('/', jwtAuthMiddleWare,async(req,res)=>{
 
   try{
 
@@ -216,7 +216,7 @@ res.json({token});
 
   console.error(err);
   res.status(500).json({error : ' Internal Server Error '});
-  
+
 
 
 }
