@@ -15,8 +15,15 @@ const newPerson =new Person(data)
 const response = await newPerson.save();
 console.log(' !!data saved !!');
 
+const payload ={
 
-const  token = generateToken(response.username);
+id: response.id,
+username :response.username
+
+}
+
+
+const  token = generateToken(payload);
 console.log("Token is  ::", token);
 
 
